@@ -1,0 +1,14 @@
+{% extends 'weather_app/base.html' %}
+
+{% block title %}{{ weather.city.name }} - Погодное Приложение{% endblock %}
+
+{% block content %}
+<h2>Погода в {{ weather.city.name }}, {{ weather.city.country }} на {{ weather.date }}</h2>
+<p><strong>Температура:</strong> {{ weather.temperature }}°C</p>
+<p><strong>Влажность:</strong> {{ weather.humidity }}%</p>
+<p><strong>Описание:</strong> {{ weather.description }}</p>
+
+<a href="{% url 'weather_update' weather.pk %}" class="btn btn-warning">Редактировать</a>
+<a href="{% url 'weather_delete' weather.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'weather_list' %}" class="btn btn-secondary">Назад к списку</a>
+{% endblock %}

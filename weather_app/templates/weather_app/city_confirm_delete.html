@@ -1,0 +1,13 @@
+{% extends 'weather_app/base.html' %}
+
+{% block title %}Удалить Город - Погодное Приложение{% endblock %}
+
+{% block content %}
+<h2>Удалить Город</h2>
+<p>Вы уверены, что хотите удалить город "{{ city.name }}, {{ city.country }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'city_detail' city.pk %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

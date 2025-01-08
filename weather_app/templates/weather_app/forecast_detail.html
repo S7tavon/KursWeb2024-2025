@@ -1,0 +1,14 @@
+{% extends 'weather_app/base.html' %}
+
+{% block title %}Прогноз - Погодное Приложение{% endblock %}
+
+{% block content %}
+<h2>Прогноз Погоды в {{ forecast.city.name }}, {{ forecast.city.country }} на {{ forecast.date }}</h2>
+<p><strong>Максимальная Температура:</strong> {{ forecast.high_temp }}°C</p>
+<p><strong>Минимальная Температура:</strong> {{ forecast.low_temp }}°C</p>
+<p><strong>Описание:</strong> {{ forecast.description }}</p>
+
+<a href="{% url 'forecast_update' forecast.pk %}" class="btn btn-warning">Редактировать</a>
+<a href="{% url 'forecast_delete' forecast.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'forecast_list' %}" class="btn btn-secondary">Назад к списку</a>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'weather_app/base.html' %}
+
+{% block title %}{{ city.name }} - Погодное Приложение{% endblock %}
+
+{% block content %}
+<h2>{{ city.name }}, {{ city.country }}</h2>
+<p><strong>Население:</strong> {{ city.population }}</p>
+
+<a href="{% url 'city_update' city.pk %}" class="btn btn-warning">Редактировать</a>
+<a href="{% url 'city_delete' city.pk %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'city_list' %}" class="btn btn-secondary">Назад к списку</a>
+
+<h3 class="mt-4">Текущая Погода</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Температура (°C)</th>
+            <th>Влажность (%)</th>
+            <th>Описание</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for weather in weather %}
+        <tr>
+            <td>{{ weather.temperature }}</td>
+            <td>{{ weather.humidity }}</td>
+            <td>{{ weather.description }}</td>
+            <td>{{ weather.date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Данные о погоде отсутствуют.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3 class="mt-4">Прогноз</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Макс. Температура (°C)</th>
+            <th>Мин. Температура (°C)</th>
+            <th>Описание</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for forecast in forecasts %}
+        <tr>
+            <td>{{ forecast.date }}</td>
+            <td>{{ forecast.high_temp }}</td>
+            <td>{{ forecast.low_temp }}</td>
+            <td>{{ forecast.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Прогнозы отсутствуют.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
